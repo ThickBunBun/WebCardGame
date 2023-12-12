@@ -5,19 +5,52 @@
 //   }
 // }
 // reveals front of the crad and shows back and viceversa
-function reveal() {
-  // declaring elemet links
-  const cardface = document.getElementById('cardface');
-  const cardback = document.getElementById('cardback');
-  console.log(cardface.style.display);
 
-  if (cardface.style.display == '' || cardface.style.display == 'none') {
-    cardback.style.display = 'none'
-    cardface.style.display = 'block';
+var valuesofcards = [];
+var idofcards = []
+
+
+function reveal(id) {
+  // declaring elemet links
+  const cardface = document.getElementById(id).getElementsByClassName("cardface");
+  const cardback = document.getElementById(id).getElementsByClassName("cardback");
+  // console.log(cardface[0].style.display = 'block');
+
+  if (cardface[0].style.display == '' || cardface[0].style.display == 'none') {
+    cardback[0].style.display = 'none';
+    cardface[0].style.display = 'block';
+    if (valuesofcards.length < 2) {
+      valuesofcards.push(cardface[0].innerText);
+      idofcards.push(document.getElementById(id).id);
+    };
+    if (valuesofcards.length == 2) {
+      if (valuesofcards[0] === valuesofcards[1]) {
+        document.getElementById(idofcards[0]).style.border = "green 5px solid";
+        document.getElementById(idofcards[0]).getElementsByClassName("cardhead")[0].style.backgroundColor = "green";
+        document.getElementById(idofcards[1]).style.border = "green 5px solid";
+        document.getElementById(idofcards[1]).getElementsByClassName("cardhead")[0].style.backgroundColor = "green";
+        idofcards = [];
+        valuesofcards = [];
+      }
+      else {
+        setTimeout(() => {
+          document.getElementById(idofcards[0]).getElementsByClassName("cardback")[0].style.display = 'block'
+          document.getElementById(idofcards[0]).getElementsByClassName("cardface")[0].style.display = 'none'
+          document.getElementById(idofcards[1]).getElementsByClassName("cardback")[0].style.display = 'block'
+          document.getElementById(idofcards[1]).getElementsByClassName("cardface")[0].style.display = 'none'
+          idofcards = [];
+          valuesofcards = [];
+        }, 500);
+
+      };
+    };
+    console.log(valuesofcards);
+    console.log(idofcards)
+    return cardface.innerText;
   }
-  else {
-    cardback.style.display = 'block';
-    cardface.style.display = 'none';
-  };
+  // else {
+  //   cardback[0].style.display = 'block';
+  //   cardface[0].style.display = 'none';
+  // };
 };
 

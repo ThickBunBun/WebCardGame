@@ -1,32 +1,54 @@
-#colorbg{
-  background-color: blue;
+*{
+  margin: 0px;
+  padding: 0px;
+}
+#page{
+  padding: 10px;
+  display: grid;
+  justify-items: center;
 }
 
 #cardfield{
-  display: grid;
+  display: inline-grid;
   border: 5px solid #000;
+  margin-right: 10%;
+  margin-left: 10%;
   grid-template-columns: repeat(4, 25%);
   grid-template-rows: repeat(4, 25%);
+  padding: 1%;
+  width: 700px;
+  height: 700px;
+
 }
 
-#cardinstance{
-  justify-self: stretch;
-  align-self: stretch;
-  background-color: grey;
+.cardinstance{
+  width: 90%;
+  height: 90%;
+  border: lightsalmon 5px solid;
+  border-radius: 5%;
   display:grid;
 }
 
-#card{
-  border: red 5px solid;
+.card{
+  padding: 0px;
+  margin: 0px;
+  display:grid;
 }
 
+.cardhead{
+  margin: 0px;
+  padding: 0px;
+  height:25px;
+  background-color: lightsalmon;
+}
 
-#cardface{
+.cardface{
   text-align: center;
   display: none;
+  padding: 5%;
 }
 
-#cardback{
+.cardback{
   text-align: center;
   font-size: 30px;
 }
