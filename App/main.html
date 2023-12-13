@@ -5,65 +5,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>Document</title>
+  <title>CardGame</title>
 </head>
 
-<body>
-  <!-- <div id="cardfield"> -->
-  <!--   <div id="cardinstance"> -->
-  <!--     <table id="card" onclick="reveal()"> -->
-  <!--       <tr id="cardhead"> -->
-  <!--         <th></th> -->
-  <!--       </tr> -->
-  <!--       <tr> -->
-  <!--         <td id="clickbody"> -->
-  <!--           <p id="cardback">:3</p> -->
-  <!--           <p id="cardface">I must be a lord of cinder <br>Because it burns when I piss</p> -->
-  <!--         </td> -->
-  <!--       </tr> -->
-  <!--     </table> -->
-  <!--   </div> -->
-  <!-- </div> -->
+<body onload="cardGen()">
   <div id="page">
     <div id="cardfield">
-      <div class="cardinstance" id="crd_1" onclick="reveal(this.id)">
-        <div class="card">
-          <div class="cardhead"></div>
-          <div class="clickbody">
-            <p class="cardback">:3</p>
-            <p class="cardface">I must be a lord of cinder <br>Because it burns when I piss</p>
-          </div>
-        </div>
+      <!-- <div class="cardinstance" id="crd_1" onclick="reveal(this.id)"> -->
+      <!--   <div class="card"> -->
+      <!--     <div class="cardhead"></div> -->
+      <!--     <div class="clickbody"> -->
+      <!--       <p class="cardback">:3</p> -->
+      <!--       <p class="cardface">I must be a lord of cinder <br>Because it burns when I piss</p> -->
+      <!--     </div> -->
+      <!--   </div> -->
+      <!-- </div> -->
+    </div>
+    <div id="ui">
+      <button id="resetbutton" onclick="reset()">Reset</button>
+      <div id="score">
+        <h1>
+          <div id="score_num">0</div>
+        </h1>
+        <h1>
+          <p id="timer">2:00</p>
+        </h1>
+
       </div>
-      <div class="cardinstance" id="crd_2" onclick="reveal(this.id)">
-        <div class="card">
-          <div class="cardhead"></div>
-          <div class="clickbody">
-            <p class="cardback">:3</p>
-            <p class="cardface">I must be a lord of cinder <br>Because it burns when I piss</p>
-          </div>
-        </div>
-      </div>
-      <div class="cardinstance" id="crd_3" onclick="reveal(this.id)">
-        <div class="card">
-          <div class="cardhead"></div>
-          <div class="clickbody">
-            <p class="cardback">:3</p>
-            <p class="cardface">It's not about how hard you shit <br>Its about how hard you piss</p>
-          </div>
-        </div>
-      </div>
-      <div class="cardinstance" id="crd_4" onclick="reveal(this.id)">
-        <div class="card">
-          <div class="cardhead"></div>
-          <div class="clickbody">
-            <p class="cardback">:3</p>
-            <p class="cardface">It's not about how hard you shit <br>Its about how hard you piss</p>
-          </div>
-        </div>
-      </div>
+      <button id="showbutton" onclick="show()">Show</button>
     </div>
     <script src="script.js"></script>
+  </div>
 </body>
 
 </html>

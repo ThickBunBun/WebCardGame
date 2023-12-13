@@ -6,6 +6,7 @@
   padding: 10px;
   display: grid;
   justify-items: center;
+  border: red 1px solid;
 }
 
 #cardfield{
@@ -51,4 +52,22 @@
 .cardback{
   text-align: center;
   font-size: 30px;
+}
+
+#ui{
+  display: grid;
+  grid-template-columns: repeat(3,33%);
+  border: black 1px solid;
+  justify-self: stretch;
+}
+
+#score{
+  display:grid;
+  display: inline;
+  justify-self: center;
+  border: red 1px solid;
+}
+#score_num{
+  justify-self: center;
+  align-self: center;
 }
