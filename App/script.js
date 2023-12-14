@@ -3,7 +3,33 @@ var valuesofcards = [];
 var idofcards = [];
 var score = 0;
 var paircount = 0;
+var timerId;
 
+let gameseconds;
+
+let startbutton = htmlElemGen(`
+      <button class="fieldbuttons" id="startbutton" onclick="start()">START</button>
+`);
+
+const timerEl = document.getElementById('timer');
+
+function loading() {
+  console.log('loading')
+  stopTimer();
+  document.getElementById('cardfield').innerHTML = ''
+  document.getElementById('cardfield').appendChild(startbutton);
+  timerEl.innerHTML = `1:30`;
+
+};
+
+function start() {
+  score = 0;
+  gameseconds = 90;
+  cardGen();
+  paircount = 0;
+  document.getElementById('score_num').innerText = score;
+  startTimer();
+};
 
 //card shuffling
 function shuffle(arr) {
@@ -109,38 +135,35 @@ function refresh() {
 
 //reset button func
 function reset() {
-  cardGen();
-  score = 0;
-  paircount = 0;
-  gameseconds = gametime * 60;
-  document.getElementById('score_num').innerText = score;
+  loading()
 };
 
 
 //game timer
-const gametime = 2;
-let gameseconds = gametime * 60;
-const timerEl = document.getElementById('timer');
 
-function timer() {
+function startTimer() {
   let minutes = Math.floor(gameseconds / 60);
   let seconds = gameseconds % 60;
-  seconds = seconds < 10 ? '0' + seconds : seconds;
-  if (gameseconds > 0) {
+  timerId = setInterval(() => {
     gameseconds--;
-  };
-  timerEl.innerHTML = `${minutes}:${seconds}`;
+    minutes = Math.floor(gameseconds / 60);
+    seconds = gameseconds % 60;
+    if (gameseconds <= 0) {
+      clearInterval(timerId)
+      document.getElementById('cardfield').innerHTML = ''
+      document.getElementById('cardfield').appendChild(startbutton);
+      minutes = Math.floor(gameseconds / 60);
+      seconds = gameseconds % 60;
+    };
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+    timerEl.innerHTML = `${minutes}:${seconds}`;
+  }, 1000);
+
 };
+function stopTimer() {
+  clearInterval(timerId)
 
-
-function startTimer(start = true) {
-  if (start == true) {
-    setInterval(timer, 1000);
-  }
 };
-
-
-startTimer()
 
 
 // gamelogic
@@ -153,12 +176,16 @@ function reveal(id) {
   if (cardface[0].style.display == '' || cardface[0].style.display == 'none') {
     cardback[0].style.display = 'none';
     cardface[0].style.display = 'block';
-    if (valuesofcards.length < 2) {
+    if (valuesofcards.length <= 2) {
       valuesofcards.push(cardface[0].innerText);
       idofcards.push(document.getElementById(id).id);
     };
     //checking the amoung of cards that've been clicked, if 2, compare the values 
     if (valuesofcards.length == 2) {
+      let cardinstances = document.querySelectorAll('.cardinstance')
+      cardinstances.forEach(element => {
+        element.removeAttribute('onclick');
+      });
       if (valuesofcards[0] === valuesofcards[1]) {
         document.getElementById(idofcards[0]).style.border = "green 5px solid";
         document.getElementById(idofcards[0]).getElementsByClassName("cardhead")[0].style.backgroundColor = "green";
@@ -170,8 +197,14 @@ function reveal(id) {
         paircount++;
         console.log(paircount)
         if (paircount == 8) {
-          refresh()
-        }
+          paircount = 0;
+          gameseconds += 10;
+          refresh();
+        };
+        cardinstances.forEach(element => {
+          element.setAttribute('onclick', "reveal(this.id)")
+        });
+
         document.getElementById('score_num').innerText = score;
       }
       else {
@@ -182,7 +215,10 @@ function reveal(id) {
           document.getElementById(idofcards[1]).getElementsByClassName("cardface")[0].style.display = 'none'
           idofcards = [];
           valuesofcards = [];
-        }, 500);
+          cardinstances.forEach(element => {
+            element.setAttribute('onclick', "reveal(this.id)")
+          });
+        }, 300);
 
       };
     };

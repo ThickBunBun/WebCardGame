@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <title>CardGame</title>
+  <script src="script.js" defer></script>
 </head>
 
-<body onload="cardGen()">
+<body onload="loading()">
   <div id="page">
     <div id="cardfield">
       <!-- <div class="cardinstance" id="crd_1" onclick="reveal(this.id)"> -->
@@ -20,6 +21,8 @@
       <!--     </div> -->
       <!--   </div> -->
       <!-- </div> -->
+      <!-- <button class="fieldbuttons" id="startbutton" onclick="start()">Start</button> -->
+      <!-- <button class="fieldbuttons" id="restartbuttno" onclick="restart()">Restart</button> -->
     </div>
     <div id="ui">
       <button id="resetbutton" onclick="reset()">Reset</button>
@@ -28,13 +31,11 @@
           <div id="score_num">0</div>
         </h1>
         <h1>
-          <p id="timer">2:00</p>
+          <p id="timer">TIME</p>
         </h1>
 
       </div>
-      <button id="showbutton" onclick="show()">Show</button>
     </div>
-    <script src="script.js"></script>
   </div>
 </body>
 
