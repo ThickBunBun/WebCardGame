@@ -1,34 +1,31 @@
-import { stopTimer, startTimer } from './timer.js';
-import cardGen from './cardgen.js';
-import htmlElemGen from './htmlElemGen.js';
-//game logic vars
+import htmlElemGen from "./htmlElemGen.js";
+import { cardGen } from "./cardgen.js";
+import { startTimer } from "./timer.js";
+import { stopTimer } from "./timer.js";
+
 let valuesofcards = [];
 let idofcards = [];
 let score = 0;
 let paircount = 0;
+let gameseconds = 10;
 
-let gameseconds = 0;
-
+const startbutton = htmlElemGen(`
+      <button class="fieldbuttons" id="startbutton" onclick="start(0,0,90)">Play</button>
+`);
 const timerEl = document.getElementById('timer');
 
-let startbutton = htmlElemGen(`
-      <button class="fieldbuttons" id="startbutton" onclick="start()">START</button>
-`);
-
-window.cardGen = cardGen()
-
-window.loading = function loading() {
-  score = 0
+window.loading_game = function load_game(score = 0) {
+  valuesofcards = [];
+  idofcards = [];
   document.getElementById('score_num').innerText = score;
-  console.log('loading')
+  // console.log('loading');
   stopTimer();
-  document.getElementById('cardfield').innerHTML = ''
+  document.getElementById('cardfield').innerHTML = '';
   document.getElementById('cardfield').appendChild(startbutton);
   timerEl.innerHTML = `1:30`;
 
 };
-
-window.start = function start() {
+window.start = function start_game() {
   score = 0;
   gameseconds = 90;
   cardGen();
@@ -36,7 +33,6 @@ window.start = function start() {
   document.getElementById('score_num').innerText = score;
   startTimer(gameseconds, timerEl);
 };
-
 
 // refreshes the field
 function refresh() {
@@ -48,7 +44,7 @@ function refresh() {
 
 //reset button func
 window.reseting = function reset() {
-  loading()
+  loading_game();
 };
 
 
@@ -59,11 +55,14 @@ window.revealing = function reveal(id) {
   // declaring elemet links
   const cardface = document.getElementById(id).getElementsByClassName("cardface");
   const cardback = document.getElementById(id).getElementsByClassName("cardback");
+  const card = document.getElementById(id).getElementsByClassName("card");
   // console.log(cardface[0].style.display = 'block');
 
   if (cardface[0].style.display == '' || cardface[0].style.display == 'none') {
     cardback[0].style.display = 'none';
     cardface[0].style.display = 'block';
+    card[0].style.background = '#e1efe1'
+
     if (valuesofcards.length <= 2) {
       valuesofcards.push(cardface[0].innerText);
       idofcards.push(document.getElementById(id).id);
@@ -75,15 +74,15 @@ window.revealing = function reveal(id) {
         element.removeAttribute('onclick');
       });
       if (valuesofcards[0] === valuesofcards[1]) {
-        document.getElementById(idofcards[0]).style.border = "green 5px solid";
-        document.getElementById(idofcards[0]).getElementsByClassName("cardhead")[0].style.backgroundColor = "green";
-        document.getElementById(idofcards[1]).style.border = "green 5px solid";
-        document.getElementById(idofcards[1]).getElementsByClassName("cardhead")[0].style.backgroundColor = "green";
+        document.getElementById(idofcards[0]).style.border = "#6beaa2 5px solid";
+        document.getElementById(idofcards[0]).getElementsByClassName("cardhead")[0].style.backgroundColor = "#6beaa2";
+        document.getElementById(idofcards[1]).style.border = "#6beaa2 5px solid";
+        document.getElementById(idofcards[1]).getElementsByClassName("cardhead")[0].style.backgroundColor = "#6beaa2";
         idofcards = [];
         valuesofcards = [];
         score++;
         paircount++;
-        console.log(paircount)
+        // console.log(paircount)
         if (paircount == 8) {
           paircount = 0;
           refresh();
@@ -98,8 +97,10 @@ window.revealing = function reveal(id) {
         setTimeout(() => {
           document.getElementById(idofcards[0]).getElementsByClassName("cardback")[0].style.display = 'block'
           document.getElementById(idofcards[0]).getElementsByClassName("cardface")[0].style.display = 'none'
+          document.getElementById(idofcards[0]).getElementsByClassName("card")[0].style.background = '#64b6c9'
           document.getElementById(idofcards[1]).getElementsByClassName("cardback")[0].style.display = 'block'
           document.getElementById(idofcards[1]).getElementsByClassName("cardface")[0].style.display = 'none'
+          document.getElementById(idofcards[1]).getElementsByClassName("card")[0].style.background = '#64b6c9'
           idofcards = [];
           valuesofcards = [];
           cardinstances.forEach(element => {
@@ -110,8 +111,8 @@ window.revealing = function reveal(id) {
       };
     };
     //debuggin section
-    console.log(valuesofcards);
-    console.log(idofcards);
+    // console.log(valuesofcards);
+    // console.log(idofcards);
     return cardface.innerText;
   };
   // else {
