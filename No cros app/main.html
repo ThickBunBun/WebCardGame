@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <title>CardGame</title>
-  <script src="old_script.js" defer></script>
+  <script src="main.js" defer></script>
 </head>
 
-<body onload="loading()">
+<body onload="load_game()">
   <div id="page">
     <div id="cardfield">
       <!-- <div class="cardinstance" id="crd_1" onclick="reveal(this.id)"> -->
@@ -25,16 +25,17 @@
       <!-- <button class="fieldbuttons" id="restartbuttno" onclick="restart()">Restart</button> -->
     </div>
     <div id="ui">
-      <button id="resetbutton" onclick="reset()">Reset</button>
+      <div>
+        <h1>
+          <p id="timer">TIME</p>
+        </h1>
+      </div>
       <div id="score">
         <h1>
           <div id="score_num">0</div>
         </h1>
-        <h1>
-          <p id="timer">TIME</p>
-        </h1>
-
       </div>
+      <button id="resetbutton" onclick="reset()">R</button>
     </div>
   </div>
 </body>
